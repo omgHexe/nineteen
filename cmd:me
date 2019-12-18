@@ -1,0 +1,28 @@
+CMD:me(playerid, params[])
+{
+	if (isnull(params))
+	    return KullanimMesaji(playerid, "/me [hareket]");
+
+	new action[256];
+    strdel(action, 0, 256);
+	strcat(action, params);
+    if(strfind(action, "\"", true, 1) != -1)
+	{
+			new ilkdenden = strfind(action, "\"", true, 1);
+			new sonrakidenden = strfind(action, "\"", true, ilkdenden+1);
+			strins(action, "{FFFFFF}", ilkdenden);
+			strins(action, "{C2A2DA}", sonrakidenden+9);
+	}
+	if(PlayerData[playerid][pPetKontrol])
+	{
+		   	SendNearbyMessage(playerid, 30.0, COLOR_PURPLE, "* %s %s", PlayerData[playerid][pPetAdi], action);
+	    return 1;
+	}
+	SendNearbyMessage(playerid, 30.0, COLOR_PURPLE, "* %s %s", OyuncuIsim(playerid, 0), action);
+	return 1;
+}
+
+
+//Trisha'ya özel yapılmıştır AR:GE konusu;
+
+                         // https://www.nineteen-roleplay.com/forum/viewtopic.php?f=442&t=9013
